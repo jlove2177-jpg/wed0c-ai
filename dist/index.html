@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeDoc AI — Intelligent Content Automation</title>
+    <style>
+        :root {
+            --bg: #0a0a0b;
+            --surface: #121214;
+            --border: #1e1e22;
+            --text: #e8e8ea;
+            --muted: #88889a;
+            --accent: #6c5ce7;
+            --accent-glow: rgba(108,92,231,0.15);
+            --green: #00c853;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        nav .logo { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.5px; }
+        nav .logo span { color: var(--accent); }
+        nav .nav-links { display: flex; gap: 32px; }
+        nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color .2s; }
+        nav a:hover { color: var(--text); }
+
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .hero h1 span { 
+            background: linear-gradient(135deg, var(--accent), #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        .hero .cta {
+            display: inline-block;
+            padding: 14px 36px;
+            background: var(--accent);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .hero .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        .features {
+            padding: 100px 0;
+            border-top: 1px solid var(--border);
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 60px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            transition: border-color .2s;
+        }
+        .feature-card:hover { border-color: var(--accent); }
+        .feature-card .icon { font-size: 2rem; margin-bottom: 16px; }
+        .feature-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .feature-card p { color: var(--muted); font-size: 0.9rem; }
+
+        .pricing {
+            padding: 100px 0;
+            border-top: 1px solid var(--border);
+        }
+        .pricing h2 { text-align: center; font-size: 2rem; margin-bottom: 60px; }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .plan {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px 32px;
+            position: relative;
+        }
+        .plan.featured {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(108,92,231,0.06), var(--surface));
+        }
+        .plan.featured::before {
+            content: 'Popular';
+            position: absolute;
+            top: -12px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 16px;
+            border-radius: 20px;
+        }
+        .plan .name { font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
+        .plan .price { font-size: 2.5rem; font-weight: 700; margin: 16px 0 4px; }
+        .plan .price span { font-size: 1rem; color: var(--muted); font-weight: 400; }
+        .plan .desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
+        .plan ul { list-style: none; }
+        .plan ul li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+        .plan ul li::before { content: '✓ '; color: var(--green); font-weight: 600; }
+
+        .contact {
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        .contact h2 { font-size: 2rem; margin-bottom: 16px; }
+        .contact p { color: var(--muted); margin-bottom: 32px; }
+        .contact a {
+            display: inline-block;
+            padding: 14px 36px;
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background .2s;
+        }
+        .contact a:hover { background: var(--accent-glow); }
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .feature-grid, .pricing-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+<script src="https://unpkg.com/htmx.org@1.9.12"></script>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">We<span>Doc</span> AI</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <h1>Intelligent content.<br><span>Zero friction.</span></h1>
+            <p>AI-powered content automation for brands, agencies, and creators. From trend to publish — fully automated.</p>
+            <a href="#contact" class="cta">Get Started</a>
+        </section>
+
+        <section class="features" id="features">
+            <h2>What WeDoc AI does</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">🔄</div>
+                    <h3>Trend → Publish</h3>
+                    <p>End-to-end automated pipeline. Ingests trends, curates with multi-agent scoring, renders, quality-checks, and publishes across platforms.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🎨</div>
+                    <h3>Multi-Agent Curation</h3>
+                    <p>Not a single pass — our system scores content from multiple angles, picks the best angle, and enforces structured output every time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">✅</div>
+                    <h3>Quality Gate</h3>
+                    <p>Every asset passes pass/fail validation before publishing. No broken renders, no empty captions, no wasted upload slots.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📊</div>
+                    <h3>White-Label Dashboard</h3>
+                    <p>Your brand, your colors. Full pipeline visibility, template catalog, and custom content rules per channel.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🛡️</div>
+                    <h3>99.5% Uptime</h3>
+                    <p>Automatic failover. If one model or service goes down, the pipeline routes around it. No manual intervention needed.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📤</div>
+                    <h3>Multi-Platform</h3>
+                    <p>YouTube, X/Twitter, and more — publish to 3+ platforms simultaneously with platform-native formatting.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing" id="pricing">
+            <h2>Plans that scale with you</h2>
+            <div class="pricing-grid">
+                <div class="plan">
+                    <div class="name">Template Marketplace</div>
+                    <div class="price">$200<span>-500</span></div>
+                    <div class="desc">One-time purchase. Deploy in under 10 minutes.</div>
+                    <ul>
+                        <li>Production-ready template</li>
+                        <li>Workflow + compose script</li>
+                        <li>Documentation + integration guide</li>
+                        <li>3 templates available</li>
+                    </ul>
+                </div>
+                <div class="plan featured">
+                    <div class="name">White-Label License</div>
+                    <div class="price">$2,500<span>/mo</span></div>
+                    <div class="desc">Full pipeline under your brand.</div>
+                    <ul>
+                        <li>Branded dashboard</li>
+                        <li>20–60 AI-generated Shorts/mo</li>
+                        <li>Dedicated template catalog</li>
+                        <li>Custom content rules</li>
+                        <li>99.5% uptime SLA</li>
+                    </ul>
+                </div>
+                <div class="plan">
+                    <div class="name">Done-for-You</div>
+                    <div class="price">$5,000<span>/mo</span></div>
+                    <div class="desc">Full-service content production.</div>
+                    <ul>
+                        <li>Everything in White-Label</li>
+                        <li>Dedicated content strategist</li>
+                        <li>Daily publishing, 4+ channels</li>
+                        <li>Custom voice + visual branding</li>
+                        <li>Weekly performance reports</li>
+                        <li>4h priority support</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <h2>Ready to automate?</h2>
+            <p>Pilot ready. One client at $2,000/mo intro rate.</p>
+            <a href="mailto:hello@wed0c-ai.com">hello@wed0c-ai.com</a>
+        </section>
+
+        <footer>
+            <p>WeDoc AI — Intelligent content. Zero friction.</p>
+        </footer>
+    </div>
+</body>
+</html>

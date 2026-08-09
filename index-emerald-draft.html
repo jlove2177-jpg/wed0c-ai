@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WeD0c AI — Automated Website Design &amp; AI Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --emerald:#062b1f;
+  --emerald-deep:#041d15;
+  --emerald-panel:#0a3a2a;
+  --silver:#c9d1d3;
+  --silver-hi:#f4f7f7;
+  --silver-lo:#7d8a8d;
+  --line:rgba(201,209,211,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--emerald-deep);color:var(--silver);min-height:100vh}
+.container{max-width:1000px;margin:0 auto;padding:20px}
+
+/* Beveled silver type */
+.silver{
+  font-family:'Cinzel',serif;
+  background:linear-gradient(180deg,var(--silver-hi) 0%,var(--silver) 45%,var(--silver-lo) 55%,var(--silver) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:0 1px 0 rgba(255,255,255,.08),0 2px 6px rgba(0,0,0,.55);
+}
+
+.hero{text-align:center;padding:80px 20px 50px;border-bottom:1px solid var(--line)}
+.hero .order{font-size:13px;letter-spacing:.45em;color:var(--silver-lo);text-transform:uppercase;margin-bottom:20px;font-family:'Cinzel',serif}
+.hero h1{font-size:64px;font-weight:900;letter-spacing:.06em;margin-bottom:18px;line-height:1.05}
+.hero p{font-size:21px;color:#9fb0a8;max-width:640px;margin:0 auto;font-style:italic}
+.rule{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--silver),transparent);margin:28px auto 0}
+
+.flagship{background:var(--emerald-panel);border:1px solid var(--line);border-radius:6px;padding:44px 40px;margin:48px 0;text-align:center}
+.flagship h2{font-size:30px;margin-bottom:14px}
+.flagship p{font-size:18px;color:#9fb0a8;max-width:600px;margin:0 auto 10px;line-height:1.6}
+.flagship .how{margin-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center}
+.flagship .how div{padding:16px;border:1px solid var(--line);border-radius:4px;background:var(--emerald)}
+.flagship .how .n{font-family:'Cinzel',serif;font-size:22px;color:var(--silver);display:block;margin-bottom:6px}
+.flagship .how span:last-child{font-size:15px;color:#8ba297}
+
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:48px 0}
+.svc{background:var(--emerald);border:1px solid var(--line);border-radius:6px;padding:36px 28px;display:flex;flex-direction:column;transition:border-color .3s,transform .3s}
+.svc:hover{border-color:rgba(201,209,211,.45);transform:translateY(-4px)}
+.svc h3{font-size:21px;margin-bottom:8px}
+.svc .price{font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:var(--silver-hi);margin:6px 0 12px}
+.svc .price small{font-size:14px;color:var(--silver-lo)}
+.svc p{font-size:16px;color:#9fb0a8;line-height:1.55;flex:1}
+.svc .btn{margin-top:22px;display:block;text-align:center;padding:13px;border-radius:3px;font-family:'Cinzel',serif;font-size:14px;font-weight:700;letter-spacing:.12em;text-decoration:none;color:var(--emerald-deep);background:linear-gradient(180deg,var(--silver-hi),var(--silver) 55%,var(--silver-lo));transition:filter .2s}
+.svc .btn:hover{filter:brightness(1.12)}
+
+.extras{border:1px solid var(--line);border-radius:6px;padding:36px 40px;margin:0 0 40px;background:var(--emerald)}
+.extras h2{font-size:24px;margin-bottom:18px}
+.extras ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.extras li{font-size:16px;color:#9fb0a8;padding:5px 0}
+.extras li::before{content:"† ";color:var(--silver)}
+
+footer{text-align:center;padding:26px 0 50px;color:#5f7269;font-size:14px;font-style:italic}
+footer .silver{font-style:normal;font-size:13px;letter-spacing:.3em}
+
+@media(max-width:800px){
+  .services{grid-template-columns:1fr}
+  .extras ul{grid-template-columns:1fr}
+  .flagship .how{grid-template-columns:1fr}
+  .hero h1{font-size:38px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+<div class="order">Battle Creek &bull; Lansing &bull; Michigan</div>
+<h1 class="silver">WeD0c AI</h1>
+<p>Websites and media, wrought by machine intelligence — delivered at the speed of business, priced for the working company.</p>
+<div class="rule"></div>
+</div>
+
+<div class="flagship">
+<h2 class="silver">Automated Website Design</h2>
+<p>Give us any company's web address. Our platform reads its colors, logos, and imagery straight from the live site — and forges a complete, finished website layout in one pass. Hosted on Cloudflare's global network: fast, cached at the edge, secure by default.</p>
+<div class="how">
+<div><span class="n silver">I</span><span>Paste your URL — we extract your brand tokens</span></div>
+<div><span class="n silver">II</span><span>AI translates them into a full site layout</span></div>
+<div><span class="n silver">III</span><span>Deployed on Cloudflare, live in hours</span></div>
+</div>
+</div>
+
+<div class="services">
+
+<div class="svc">
+<h3 class="silver">ExplainerPro</h3>
+<div class="price">from $29 <small>/video</small></div>
+<p>A custom explainer video for your business — script, AI visuals, voiceover, and music. For landing pages, ads, and pitches.</p>
+<a class="btn" href="mailto:hello@wed0c-ai.com?subject=ExplainerPro%20Order">ORDER AN EXPLAINER</a>
+</div>
+
+<div class="svc">
+<h3 class="silver">DailyVid</h3>
+<div class="price">$79 <small>/month</small></div>
+<p>Daily short videos for your audience, on autopilot. Name your niche once — a custom short is generated and delivered every day.</p>
+<a class="btn" href="mailto:hello@wed0c-ai.com?subject=DailyVid%20Signup">START DAILY SHORTS</a>
+</div>
+
+<div class="svc">
+<h3 class="silver">SKUVid</h3>
+<div class="price">$25 <small>/SKU</small></div>
+<p>3D-style rotating product videos with AI voiceover, per SKU. Built for e-commerce catalogs — bulk CSV orders welcome.</p>
+<a class="btn" href="mailto:hello@wed0c-ai.com?subject=SKUVid%20Order">ORDER SKU VIDEOS</a>
+</div>
+
+</div>
+
+<div class="extras">
+<h2 class="silver">The Full SMB Suite</h2>
+<ul>
+<li>Content pipeline — ongoing video production</li>
+<li>Bookkeeping — per-project cost tracking &amp; invoicing</li>
+<li>Legal docs — ToS, privacy policy, waivers, NDAs</li>
+<li>Facebook Ads — campaign setup &amp; creative</li>
+<li>Facebook Marketplace service listings</li>
+<li>Multi-client accounting &amp; reports</li>
+</ul>
+</div>
+
+<footer>
+<span class="silver">WEDOC AI</span><br>
+Monthly retainer or per-project &bull; Undercutting agencies since day one<br>
+<a href="mailto:hello@wed0c-ai.com" style="color:#9fb0a8">hello@wed0c-ai.com</a>
+</footer>
+
+</div>
+</body>
+</html>
