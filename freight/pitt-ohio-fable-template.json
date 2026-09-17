@@ -1,0 +1,83 @@
+{
+  "montage_manifest": {
+    "version": "1.1",
+    "run_id": "pitt-ohio-sales-enablement-v1",
+    "stage": "director_complete",
+    "meta": {
+      "system": "Pitt-Ohio Express — Sales Enablement OS",
+      "tagline": "One load at a time.",
+      "company": "PITT OHIO — LTL Trucking, Supply Chain & Logistics Services",
+      "platform": ["n8n", "web_dashboard", "sms", "phone"],
+      "description": "Daily sales machine for LTL freight reps: sourcing, research, cold calling, follow-up, and CRM — automated and tracked.",
+      "brand_colors": {
+        "primary": "#1d2129",
+        "secondary": "#333333",
+        "accent": "#43A047",
+        "text": "#ffffff",
+        "surface": "#272728"
+      },
+      "target_metrics": {
+        "leads_per_day": 15,
+        "calls_per_day": 30,
+        "conversations_per_day": 8,
+        "loads_per_week": 5,
+        "conversion_rate": {"min": 0.05, "max": 0.10}
+      }
+    },
+    "pipeline": {
+      "stages": ["director", "generator", "compiler"],
+      "stage_roles": {
+        "director": "Validate manifest and sales config",
+        "generator": "Generate scripts, cadences, dashboards",
+        "compiler": "Output sales workflow PDF, CRM template, lead tracker sheet, cold call script card"
+      }
+    },
+    "daily_workflow": {
+      "morning_routine": {
+        "duration_min": 15,
+        "steps": [
+          {"id": "source", "action": "Source leads", "sources": ["DAT Load Board", "Truckstop.com", "LinkedIn", "SaferWatch"], "target": 15},
+          {"id": "research", "action": "Research each lead", "fields": ["company", "contact", "lane", "load_count", "credit", "past_interactions"], "time_per_lead_min": 2},
+          {"id": "plan", "action": "Plan call order", "priority": "highest lane match first"}
+        ]
+      },
+      "call_rotation": {
+        "duration": "ongoing",
+        "script": "Hey [name], this is [you] with PITT OHIO. I see you move a lot of [lane]. We run that lane daily — trucks positioned and ready. I'm not asking for a contract. I'm asking for one load. What do you have moving today or tomorrow?",
+        "target_daily_calls": 30,
+        "notes": "Always name a specific lane. Never pitch. One load."
+      },
+      "follow_up_cadence": {
+        "touches": [
+          {"day": 1, "action": "Call + email", "content": "Lane info + your direct number"},
+          {"day": 3, "action": "Call + text", "content": "Got a truck open tomorrow if you need it"},
+          {"day": 7, "action": "Send rate sheet", "content": "One page, 3 sample lanes, competitive rates"},
+          {"day": 14, "action": "Final call", "content": "Circle back. Pause if no interest."},
+          {"day": 30, "action": "Move to warm pool", "content": "Re-enter weekly scan"}
+        ]
+      },
+      "crm_logging": {
+        "required_fields": ["lead_name", "contact_name", "contact_title", "date", "type", "summary", "next_step"],
+        "automation": "auto-log every call, email, text"
+      }
+    },
+    "capabilities": [
+      {"id": "dat_api", "name": "DAT Load Board API", "purpose": "Auto-pull leads matching Pitt-Ohio lanes", "status": "optional"},
+      {"id": "saferwatch", "name": "SaferWatch API", "purpose": "Auto credit checks on new leads", "status": "optional"},
+      {"id": "twilio", "name": "Twilio SMS", "purpose": "Automated follow-up text cadence", "status": "recommended"},
+      {"id": "crm", "name": "CRM (HubSpot / Salesforce / custom)", "purpose": "Auto-log all sales activity", "status": "recommended"},
+      {"id": "rate_generator", "name": "Rate Quote Generator", "purpose": "Generate competitive rate sheets from lane history", "status": "phase2"},
+      {"id": "call_transcription", "name": "Call Recording + Transcription", "purpose": "Coach reps, auto-log call summaries", "status": "phase2"},
+      {"id": "lead_scoring", "name": "Lead Scoring AI", "purpose": "Score leads 0-100 on lane match, load frequency, credit, relationship — prioritize the 20% that drive 80% of loads", "status": "backlog"},
+      {"id": "rate_intel", "name": "Competitive Rate Intelligence", "purpose": "Scrape market rates per lane, auto-adjust quotes to stay competitive", "status": "backlog"},
+      {"id": "load_alerts", "name": "Live Load Board Alerts", "purpose": "Real-time DAT/Truckstop monitoring for matching lanes + equipment — quote first", "status": "backlog"},
+      {"id": "sales_coach", "name": "Sales Coach AI", "purpose": "Review call transcript, suggest improvements, update the script", "status": "backlog"},
+      {"id": "customer_360", "name": "Customer 360 Dashboard", "purpose": "One screen: profile, past loads, history, quotes, relationship score", "status": "backlog"},
+      {"id": "auto_quote_text", "name": "Auto-Quote Texting", "purpose": "Broker texts a lane → auto-quote back in under 10s", "status": "backlog"},
+      {"id": "territory_heatmap", "name": "Territory Heatmap", "purpose": "Map load flow, gaps, and competitor-dominated regions", "status": "backlog"},
+      {"id": "relationship_timeline", "name": "Relationship Timeline", "purpose": "Per-lead timeline of every call, email, text, load, quote", "status": "backlog"},
+      {"id": "forecasting", "name": "Pipeline Forecasting", "purpose": "Predict weekly/monthly loads from active conversations and history", "status": "backlog"},
+      {"id": "auto_rate_confirm", "name": "Automated Rate Confirmation", "purpose": "On quote accept → generate rate confirmation → email both sides → log to CRM", "status": "backlog"}
+    ]
+  }
+}

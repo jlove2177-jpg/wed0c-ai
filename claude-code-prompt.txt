@@ -1,0 +1,26 @@
+Fix 5 things on weeder-ms-7e59 (Ubuntu, RX 7900 XTX, ROCm 7.1):
+
+1. VOICE BOX — Test Kokoro (:17493), Coqui (:17494). If Coqui down: pip3 install coqui-tts (NOT TTS). Set fallback chain in assemble.py: Edge → Kokoro → Coqui. Diff before save.
+
+2. AGENT OS — Read ~/SOP.md. Set max_concurrent_children: 3 in ~/.hermes/config.yaml delegation section. Workers=Ornith :8080, Reviewers=OpenRouter free models from config's moa.reference_models. Memory <50%. Always delegate. Diff before save.
+
+3. TAILNET — Do NOT sed to 0.0.0.0. For python http.server: restart with --bind 100.87.57.33. Systemd services: leave them. Verify with curl http://100.87.57.33:9403/ NOT localhost. Check BOTH systemctl status and systemctl --user status.
+
+4. BLENDER SOP — Analyze ~/Projects/murasaki/murasaki.blend. Save SOP to ~/.hermes/skills/blender-sop.md (<40 lines). The unified head mesh "Sphere" (602 verts) has 13 shape keys. Hard rule: shape keys MUST be built AFTER remove_doubles. NEVER run remove_doubles on a mesh with shape keys — it nukes them silently. Pipeline: open (blender -b -noaudio -P script.py) → join parts to Sphere → remove_doubles(0.01) → build shape keys (iterate verts by position: z>1.0 = face, 1.04<z<1.07 & |x|<0.06 = mouth) → GLB export (export_format='GLB', export_animations=True, export_materials='EXPORT') → save blend. Fan pins Pin_0/1/2 have Z-rotation keyframes. Displace modifiers don't export to GLB — breathing must be JS-side.
+
+5. POCKETSPHINX — murasaki_listen.py writes to a FIFO (/tmp/murasaki_phonemes). A browser can't read a FIFO. Change it to overwrite /tmp/murasaki_phoneme.txt with the current phoneme (single line). Write atomically — write to a temp file first, then rename over the target, so a mid-write read never grabs a blank. Serve via :9403 http.server. Wire viewer to poll http://100.87.57.33:9403/murasaki_phoneme.txt every 100ms, set that morph target to 1.0, others to 0. GLB morph names already match — no remap.
+
+=== Blender context (for step 4) ===
+Blend: ~/Projects/murasaki/murasaki.blend (24 meshes, 215 KB)
+Head: "Sphere" unified, 602 verts, 13 shape keys (Basis + 6 emotions + 5 phonemes + Blink)
+Fan pins: Pin_0/1/2 with Z-rotation keyframes
+Pitfalls: shape keys break after remove_doubles — build them AFTER cleanup. Displace modifiers don't export to GLB. export_format='GLB' not 'glb'. export_materials='EXPORT' not True.
+
+=== pocketsphinx context (for step 5) ===
+Script: ~/Projects/murasaki/murasaki_listen.py (120 lines, working)
+Maps phonemes to: AA, EY, IY, OW, UW, M (silence)
+Currently writes to FIFO /tmp/murasaki_phonemes — must change to plain file
+Must write atomically: write to .tmp, then rename over target
+GLB already has matching morph target names
+
+Verify: curl 100.87.57.33:9403, systemctl status + --user, tailscale ping 100.65.27.68. Report diffs and save Blender SOP.
